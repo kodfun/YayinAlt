@@ -1,0 +1,106 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-color: black;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+  }
+  main {
+    width: 100vw;
+    height: 100vh;
+    border: 1rem solid #3d0642;
+    overflow: hidden;
+  }
+  main>section {
+    animation: kay 30s infinite;
+  }
+  @keyframes kay {
+    0% {
+      transform: translateY(0vw);
+    }
+    80% {
+      transform: translateY(0vw);
+    }
+    85% {
+      transform: translateY(-100%);
+    }
+    95% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  section {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  #saat {
+    font-size: 7rem;
+    font-family: monospace;
+  }
+  #logo {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 5rem;
+    height: 5rem;
+    margin: 2rem;
+  }
+  #tarih {
+    font-size: 2.5rem;
+  }
+  #sahne1 {
+    font-size: 1em;
+  }
+  #sahne2 {
+    font-size: 4rem;
+  }
+</style>
+
+<main>
+  <section id="sahne1">
+    <div id="saat">00:00:00</div>
+    <div id="tarih">tarih</div>
+  </section>
+  <section id="sahne2">
+    KodFun Canlı Yayını
+  </section>
+</main>
+
+<img id="logo" src="logo.png" alt="logo">
+<script>
+  const divSaat = document.querySelector('#saat');
+  const divTarih = document.querySelector('#tarih');
+
+  function zaman() {
+    const suan = new Date();
+    const saat = suan.getHours();
+    const dakika = suan.getMinutes();
+    const saniye = suan.getSeconds();
+
+    const saatDuzenle = saat < 10 ? '0' + saat : saat;
+    const dakikaDuzenle = dakika < 10 ? '0' + dakika : dakika;
+    const saniyeDuzenle = saniye < 10 ? '0' + saniye : saniye;
+
+    const zaman = `${saatDuzenle}:${dakikaDuzenle}:${saniyeDuzenle}`;
+    document.title = zaman;
+    divSaat.textContent = zaman;
+    // date with weekday
+    divTarih.textContent = suan.toLocaleDateString("tr-TR", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
+
+  setInterval(zaman, 1000);
+</script>
